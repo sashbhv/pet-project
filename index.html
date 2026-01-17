@@ -3,10 +3,647 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GitHub Pages OK</title>
+  <title>Domain — UX/UI Design Portfolio</title>
+  <meta
+    name="description"
+    content="Domain is a UX/UI design portfolio showcasing product strategy, research, and high-fidelity interface design."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #0c0e14;
+      --panel: #12162a;
+      --surface: #151a32;
+      --text: #f6f7fb;
+      --muted: #b3bdd6;
+      --accent: #8ef1ff;
+      --accent-2: #a88bff;
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 24px 60px rgba(6, 8, 25, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Manrope", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, rgba(142, 241, 255, 0.12), transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(168, 139, 255, 0.2), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      gap: 96px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 24px;
+      top: 16px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--text);
+      color: #0c0e14;
+      font-weight: 600;
+      transform: translateY(-200%);
+      transition: transform 0.2s ease;
+      z-index: 10;
+    }
+
+    .skip-link:focus-visible {
+      transform: translateY(0);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 12px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(142, 241, 255, 0.85), rgba(168, 139, 255, 0.9));
+      display: grid;
+      place-items: center;
+      color: #0c0e14;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-cta {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, rgba(142, 241, 255, 0.25), rgba(168, 139, 255, 0.35));
+      color: var(--text);
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 48px;
+      align-items: center;
+      padding: 48px;
+      background: linear-gradient(135deg, rgba(21, 26, 50, 0.95), rgba(18, 22, 42, 0.85));
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(142, 241, 255, 0.25), transparent 65%);
+      top: -120px;
+      right: -120px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 4vw, 3.75rem);
+      line-height: 1.05;
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin: 20px 0 28px;
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .button {
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(142, 241, 255, 0.9), rgba(168, 139, 255, 0.9));
+      color: #0c0e14;
+    }
+
+    .button.secondary {
+      border-color: rgba(255, 255, 255, 0.18);
+      color: var(--text);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .metric h3 {
+      font-size: 1.4rem;
+    }
+
+    .metric span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 460px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .grid.cols-3 {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card {
+      padding: 24px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 32px rgba(5, 8, 23, 0.35);
+      display: grid;
+      gap: 12px;
+    }
+
+    .card span {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .card a {
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text);
+    }
+
+    .card a span {
+      color: inherit;
+      font-size: 1rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .project-preview {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      background: linear-gradient(135deg, rgba(142, 241, 255, 0.12), rgba(168, 139, 255, 0.08));
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
+
+    .process {
+      display: grid;
+      gap: 18px;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(142, 241, 255, 0.2);
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .testimonial {
+      display: grid;
+      gap: 20px;
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(142, 241, 255, 0.12), rgba(168, 139, 255, 0.15));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .testimonial p {
+      font-size: 1.1rem;
+    }
+
+    .testimonial .author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+    }
+
+    .author img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .contact {
+      display: grid;
+      gap: 24px;
+      padding: 32px;
+      border-radius: 28px;
+      background: rgba(18, 22, 42, 0.9);
+      border: 1px solid var(--border);
+    }
+
+    .toolbox {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .toolbox span {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .contact-details {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .contact-item {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        padding: 32px;
+      }
+
+      .hero-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>It works 🚀</h1>
-  <p>If you see this page, GitHub Pages is working correctly.</p>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">D</div>
+        <div>
+          <div>Domain Studio</div>
+          <small style="color: var(--muted);">UX/UI Design Portfolio</small>
+        </div>
+      </div>
+      <nav>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="#contact">Book a consult</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+      <div>
+        <p style="text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.8rem; color: var(--accent);">Design Portfolio</p>
+        <h1>Human-centered product design for SaaS, wellness, and fintech brands.</h1>
+        <p>
+          Domain partners with product teams to translate research into usable interfaces. From discovery sprints
+          to scalable design systems, every engagement is grounded in evidence, accessibility, and measurable impact.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#work">View case studies</a>
+          <a class="button secondary" href="#contact">Schedule intro</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <strong>Recent outcomes</strong>
+        <div class="project-preview">
+          <span>Atlas Health</span>
+          <strong>+28% patient activation</strong>
+          <p>Reframed onboarding, reduced cognitive load, and improved trust signals.</p>
+        </div>
+        <div class="project-preview">
+          <span>BridgePay</span>
+          <strong>2.4x demo-to-trial conversion</strong>
+          <p>New IA, pricing clarity, and mobile-first merchant dashboards.</p>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric">
+            <h3>12+</h3>
+            <span>Products launched</span>
+          </div>
+          <div class="metric">
+            <h3>5 yrs</h3>
+            <span>Design leadership</span>
+          </div>
+          <div class="metric">
+            <h3>98%</h3>
+            <span>Client retention</span>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <section id="work">
+      <div class="section-title">
+        <div>
+          <h2>Selected UX/UI Work</h2>
+          <p>End-to-end case studies that blend user research, strategy, and high-fidelity interface craft.</p>
+        </div>
+        <a class="button secondary" href="#contact">Request full portfolio</a>
+      </div>
+      <div class="grid cols-3">
+        <article class="card">
+          <span>Fintech</span>
+          <h3>BridgePay Merchant Hub</h3>
+          <p>Reimagined payout workflows with data-rich dashboards and a 3-step onboarding funnel.</p>
+          <div class="project-preview">
+            <strong>Deliverables</strong>
+            <p>Competitive analysis · Journey mapping · Design system · Prototype testing</p>
+          </div>
+          <a href="#contact"><span>View case study →</span></a>
+        </article>
+        <article class="card">
+          <span>Wellness</span>
+          <h3>Atlas Health Companion</h3>
+          <p>Built a mobile-first care plan experience designed around behavioral science.</p>
+          <div class="project-preview">
+            <strong>Deliverables</strong>
+            <p>Research synthesis · Accessibility audit · UI kit · Product launch support</p>
+          </div>
+          <a href="#contact"><span>View case study →</span></a>
+        </article>
+        <article class="card">
+          <span>Enterprise</span>
+          <h3>Nova Analytics Suite</h3>
+          <p>Streamlined complex data reporting into an adaptive workspace for cross-functional teams.</p>
+          <div class="project-preview">
+            <strong>Deliverables</strong>
+            <p>Service blueprint · IA restructuring · Dashboard redesign · Design QA</p>
+          </div>
+          <a href="#contact"><span>View case study →</span></a>
+        </article>
+      </div>
+      </section>
+
+      <section id="services">
+      <div class="section-title">
+        <div>
+          <h2>Services</h2>
+          <p>Flexible engagement models built for early-stage startups and growth-stage product teams.</p>
+        </div>
+      </div>
+      <div class="grid cols-3">
+        <article class="card">
+          <span>Strategy</span>
+          <h3>Discovery &amp; UX Research</h3>
+          <p>User interviews, persona refinement, and opportunity mapping to clarify product direction.</p>
+        </article>
+        <article class="card">
+          <span>Experience</span>
+          <h3>UX Architecture</h3>
+          <p>Information architecture, journey maps, and flow optimization for complex platforms.</p>
+        </article>
+        <article class="card">
+          <span>Interface</span>
+          <h3>UI Design Systems</h3>
+          <p>High-fidelity design, accessibility standards, and component libraries that scale.</p>
+        </article>
+      </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <div>
+            <h2>Toolbox</h2>
+            <p>Design ops and delivery tools used to keep teams aligned and build momentum.</p>
+          </div>
+        </div>
+        <div class="toolbox">
+          <span>Figma</span>
+          <span>FigJam</span>
+          <span>Notion</span>
+          <span>Miro</span>
+          <span>Maze</span>
+          <span>Zeroheight</span>
+          <span>Webflow</span>
+          <span>Storybook</span>
+        </div>
+      </section>
+
+      <section id="process">
+      <div class="section-title">
+        <div>
+          <h2>How We Work</h2>
+          <p>A collaborative approach to align stakeholders, validate solutions, and deliver measurable growth.</p>
+        </div>
+      </div>
+      <div class="process">
+        <div class="process-step">
+          <div class="step-number">01</div>
+          <div>
+            <h3>Immersion &amp; Alignment</h3>
+            <p>Kickoff workshops, stakeholder interviews, and goal definition to align on the product vision.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-number">02</div>
+          <div>
+            <h3>Exploration &amp; Validation</h3>
+            <p>Rapid ideation, wireframes, and usability testing cycles to validate the right experience.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-number">03</div>
+          <div>
+            <h3>Design &amp; Delivery</h3>
+            <p>High-fidelity design, system documentation, and ongoing support through launch.</p>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <section>
+      <div class="testimonial">
+        <p>
+          “Domain elevated our product UX with a rare blend of strategic thinking and pixel-perfect execution.
+          We shipped two quarters faster and saw a double-digit increase in activation.”
+        </p>
+        <div class="author">
+          <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=200&q=80" alt="Portrait of client" />
+          <div>
+            <strong>Jasmine Patel</strong><br />
+            VP Product, Atlas Health
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="section-title">
+          <div>
+            <h2>Let’s Build Your Next Experience</h2>
+            <p>Available for new projects starting next month. Reach out for a portfolio walkthrough or scoping session.</p>
+          </div>
+          <a class="button primary" href="mailto:hello@domain.design">hello@domain.design</a>
+        </div>
+        <div class="contact-details">
+          <div class="contact-item">
+            <strong>Studio</strong>
+            <p>Remote-first · PST / CET overlap</p>
+          </div>
+          <div class="contact-item">
+            <strong>Availability</strong>
+            <p>2 project slots open · Retainers welcome</p>
+          </div>
+          <div class="contact-item">
+            <strong>Social</strong>
+            <p>Behance · Dribbble · LinkedIn</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2024 Domain Studio. All rights reserved.</span>
+      <span>Designed with accessible typography and inclusive UX patterns.</span>
+    </footer>
+  </div>
 </body>
 </html>
